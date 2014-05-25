@@ -1,5 +1,7 @@
 package net.maeph.jug.lucene.config;
 
+import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,9 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * Created by mephi_000 on 25.05.14.
- */
+
 @Configuration
 @ComponentScan("net.maeph.jug.lucene")
 public class AppConfig {
@@ -31,4 +31,10 @@ public class AppConfig {
         Resource resource = resourceLoader.getResource("/dataset.json");
         return Files.newBufferedReader(Paths.get(resource.getURI()));
     }
+    
+    @Bean
+    public SolrServer solrServer() {
+        return new ConcurrentUpdateSolrServer("http://localhost:8983/solr/jug", 100, 10);
+    }
+    
 }

@@ -10,15 +10,21 @@ repositories {
 }
 
 dependencies {
+    
     compile "org.springframework:spring-core:$springVersion"
     compile "org.springframework:spring-test:$springVersion"
     compile "org.springframework:spring-context:$springVersion"
     compile "org.springframework:spring-beans:$springVersion"
 
+    //Lucene example dependencies
     compile "org.apache.lucene:lucene-core:$luceneVersion"
     compile "org.apache.lucene:lucene-analyzers-common:$luceneVersion"
     compile "org.apache.lucene:lucene-queryparser:$luceneVersion"
     
+    //Solr Example dependencies
+    compile 'org.apache.solr:solr-solrj:4.8.0'
+
+
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.assertj:assertj-core:1.6.0'
     

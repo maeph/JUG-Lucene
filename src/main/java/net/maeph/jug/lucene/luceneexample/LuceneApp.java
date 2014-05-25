@@ -40,8 +40,7 @@ public class LuceneApp implements LuceneExample {
 
     @Override
     public void index() {
-        try {
-            IndexWriter writer = getWriter();
+        try (IndexWriter writer = getWriter()){
             resource.forEach(entry -> {
                 try {
                     writer.addDocument(fromMap(entry));
@@ -49,20 +48,21 @@ public class LuceneApp implements LuceneExample {
                     e.printStackTrace();
                 }
             });
-            
-            writer.close();
-        } catch (IOException e) {
+        }catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private Query getQuery() throws ParseException {
+        QueryParser parser = new QueryParser(Version.LUCENE_48, "name", ANALYZER);
+        return parser.parse("Luna");
     }
 
     @Override
     public void query() throws IOException, ParseException {
         IndexSearcher searcher = getSearcher();
 
-        QueryParser parser = new QueryParser(Version.LUCENE_48, "name", ANALYZER);
-        Query queryForLuna = parser.parse("Luna");
-        TopDocs search = searcher.search(queryForLuna, 10);
+        TopDocs search = searcher.search(getQuery(), 10);
         
         Stream.of(search.scoreDocs)
                 .map(scoreDoc -> extractDocument(searcher, scoreDoc))

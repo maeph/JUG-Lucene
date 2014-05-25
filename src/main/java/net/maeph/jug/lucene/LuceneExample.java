@@ -1,6 +1,7 @@
 package net.maeph.jug.lucene;
 
 import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.solr.client.solrj.SolrServerException;
 
 import java.io.IOException;
 
@@ -9,7 +10,7 @@ import java.io.IOException;
  */
 public interface LuceneExample {
     
-    void index();
-    void query() throws IOException, ParseException;
+    void index() throws IOException, SolrServerException;
+    void query() throws IOException, ParseException, SolrServerException;
     
 }
