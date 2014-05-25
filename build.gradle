@@ -1,0 +1,26 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+springVersion = '4.0.4.RELEASE'
+luceneVersion = '4.8.1'
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-test:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-beans:$springVersion"
+
+    compile "org.apache.lucene:lucene-core:$luceneVersion"
+    compile "org.apache.lucene:lucene-analyzers-common:$luceneVersion"
+    compile "org.apache.lucene:lucene-queryparser:$luceneVersion"
+    
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'org.assertj:assertj-core:1.6.0'
+    
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
