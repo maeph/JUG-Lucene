@@ -2,6 +2,9 @@ package net.maeph.jug.lucene.config;
 
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrServer;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -35,6 +38,12 @@ public class AppConfig {
     @Bean
     public SolrServer solrServer() {
         return new ConcurrentUpdateSolrServer("http://localhost:8983/solr/jug", 100, 10);
+    }
+    
+    @Bean
+    public Client client() {
+        return new TransportClient().addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
+        
     }
     
 }

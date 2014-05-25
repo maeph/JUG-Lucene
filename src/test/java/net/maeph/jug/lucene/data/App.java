@@ -1,6 +1,7 @@
 package net.maeph.jug.lucene.data;
 
 import net.maeph.jug.lucene.config.AppConfig;
+import net.maeph.jug.lucene.esexample.ElasticsearchApp;
 import net.maeph.jug.lucene.luceneexample.LuceneApp;
 import net.maeph.jug.lucene.solrexample.SolrApp;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -23,7 +24,11 @@ public class App {
 
         SolrApp solrApp = context.getBean(SolrApp.class);
 //        solrApp.index();
-        solrApp.query();
+//        solrApp.query();
+
+        ElasticsearchApp elasticsearchApp = context.getBean(ElasticsearchApp.class);
+//        elasticsearchApp.index();
+        elasticsearchApp.query();
 
     }
 }

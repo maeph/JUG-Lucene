@@ -23,6 +23,9 @@ dependencies {
     
     //Solr Example dependencies
     compile 'org.apache.solr:solr-solrj:4.8.0'
+    
+    //Elasticsearch Example dependencies
+    compile 'org.elasticsearch:elasticsearch:1.1.1'
 
 
     compile 'com.google.code.gson:gson:2.2.4'

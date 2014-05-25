@@ -10,6 +10,7 @@ import java.io.IOException;
  */
 public interface LuceneExample {
     
+    
     void index() throws IOException, SolrServerException;
     void query() throws IOException, ParseException, SolrServerException;
     
