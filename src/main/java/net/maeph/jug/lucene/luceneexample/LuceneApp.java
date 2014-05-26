@@ -2,6 +2,7 @@ package net.maeph.jug.lucene.luceneexample;
 
 
 import net.maeph.jug.lucene.LuceneExample;
+import net.maeph.jug.lucene.config.AppConfig;
 import net.maeph.jug.lucene.data.DatasetResource;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -20,6 +21,8 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import org.assertj.core.util.Files;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -28,7 +31,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 @Component
-public class LuceneApp implements LuceneExample {
+public class LuceneApp {
 
     public static final Version MATCH_VERSION = Version.LUCENE_48;
     public static final String INDEX_PATH = "c:\\jug\\lucene\\lucene\\index";
@@ -38,7 +41,6 @@ public class LuceneApp implements LuceneExample {
     @Autowired
     DatasetResource resource;
 
-    @Override
     public void index() {
         try (IndexWriter writer = getWriter()){
             resource.forEach(entry -> {
@@ -58,7 +60,6 @@ public class LuceneApp implements LuceneExample {
         return parser.parse("Luna");
     }
 
-    @Override
     public void query() throws IOException, ParseException {
         IndexSearcher searcher = getSearcher();
 
@@ -134,5 +135,14 @@ public class LuceneApp implements LuceneExample {
 
     private void addDoubleValue(Document doc, Object key, Object value) {
         doc.add(new LongField(key.toString(),((Double)value).intValue(), Field.Store.YES));
+    }
+
+
+    public static void main(String[] args) throws IOException, ParseException {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        LuceneApp luceneApp = context.getBean(LuceneApp.class);
+        
+        luceneApp.index();
+        luceneApp.query();
     }
 }

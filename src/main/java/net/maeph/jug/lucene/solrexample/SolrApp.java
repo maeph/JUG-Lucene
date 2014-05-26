@@ -1,6 +1,7 @@
 package net.maeph.jug.lucene.solrexample;
 
 import net.maeph.jug.lucene.LuceneExample;
+import net.maeph.jug.lucene.config.AppConfig;
 import net.maeph.jug.lucene.data.DatasetResource;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -10,6 +11,8 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.util.NamedList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -17,7 +20,7 @@ import java.util.Map;
 
 
 @Component
-public class SolrApp implements LuceneExample {
+public class SolrApp { 
 
     @Autowired
     private DatasetResource resource;
@@ -25,7 +28,6 @@ public class SolrApp implements LuceneExample {
     @Autowired
     private SolrServer solrServer;
 
-    @Override
     public void index() throws IOException, SolrServerException {
         resource.forEach(element -> {
             try {
@@ -53,7 +55,6 @@ public class SolrApp implements LuceneExample {
         return document;
     }
 
-    @Override
     public void query() throws IOException, ParseException, SolrServerException {
 
         QueryResponse query = solrServer.query(new SolrQuery().setQuery("name:luna"));
@@ -65,6 +66,14 @@ public class SolrApp implements LuceneExample {
                         document.get("name"),
                         document.get("gender"),
                         document.get("about"))));
+    }
+
+    public static void main(String[] args) throws IOException, SolrServerException, ParseException {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        SolrApp solrApp = context.getBean(SolrApp.class);
+
+        solrApp.index();
+        solrApp.query();
     }
     
 }
