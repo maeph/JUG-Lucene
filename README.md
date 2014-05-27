@@ -9,7 +9,7 @@ Examples for:
 
 a) direct Lucene indexing and searching
 
-b) Solr indexing and searching - WIP
+b) Solr indexing and searching
 
-c) Elasticsearch indexing and searching - WIP
+c) Elasticsearch indexing and searching
 
