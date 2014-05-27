@@ -56,7 +56,7 @@ public class LuceneApp {
     }
 
     private Query getQuery() throws ParseException {
-        QueryParser parser = new QueryParser(Version.LUCENE_48, "name", ANALYZER);
+        QueryParser parser = new QueryParser(MATCH_VERSION, "name", ANALYZER);
         return parser.parse("Luna");
     }
 
@@ -92,19 +92,24 @@ public class LuceneApp {
     }
 
     private IndexWriter getWriter() throws IOException {
-        File path = new File(INDEX_PATH);
-        
-        if (!path.exists()) {
-            path = Files.newFolder(INDEX_PATH);            
-        }
+        File path = getIndexDir();
 
         FSDirectory directory = FSDirectory.open(path);
         IndexWriterConfig iwc = new IndexWriterConfig(MATCH_VERSION, ANALYZER);
         iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
         return new IndexWriter(directory, iwc);
     }
-    
-    
+
+    private File getIndexDir() {
+        File path = new File(INDEX_PATH);
+
+        if (!path.exists()) {
+            path = Files.newFolder(INDEX_PATH);            
+        }
+        return path;
+    }
+
+
     Document fromMap(Map element) {
         Document doc = new Document();
         element.forEach((key, value) -> {

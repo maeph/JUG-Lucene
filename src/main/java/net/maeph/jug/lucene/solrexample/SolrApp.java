@@ -17,28 +17,30 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.stream.Stream;
 
 
 @Component
-public class SolrApp { 
+public class SolrApp {
 
     @Autowired
     private DatasetResource resource;
-
     @Autowired
     private SolrServer solrServer;
 
     public void index() throws IOException, SolrServerException {
         resource.forEach(element -> {
             try {
-                solrServer.add(fromMap(element), 1000);
-                System.out.println("indexed:" + element.get("id"));
+
+                solrServer.add(fromMap(element));
             } catch (SolrServerException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            
         });
+        solrServer.commit();
        
     }
 
