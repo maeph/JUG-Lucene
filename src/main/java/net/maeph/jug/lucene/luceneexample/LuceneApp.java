@@ -50,6 +50,7 @@ public class LuceneApp {
                     e.printStackTrace();
                 }
             });
+            writer.commit();
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -146,8 +147,9 @@ public class LuceneApp {
     public static void main(String[] args) throws IOException, ParseException {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         LuceneApp luceneApp = context.getBean(LuceneApp.class);
-        
+        System.out.println("Indexing...");
         luceneApp.index();
+        System.out.println("Querying...");
         luceneApp.query();
     }
 }

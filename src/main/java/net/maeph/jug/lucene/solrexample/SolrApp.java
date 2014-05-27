@@ -68,14 +68,21 @@ public class SolrApp {
                         document.get("name"),
                         document.get("gender"),
                         document.get("about"))));
+        
     }
 
     public static void main(String[] args) throws IOException, SolrServerException, ParseException {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         SolrApp solrApp = context.getBean(SolrApp.class);
-
+        System.out.println("Indexing...");
         solrApp.index();
+        System.out.println("Querying...");
         solrApp.query();
+        solrApp.shutdown();
     }
-    
+
+    private void shutdown() {
+        solrServer.shutdown();
+    }
+
 }

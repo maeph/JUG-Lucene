@@ -47,7 +47,6 @@ public class ElasticsearchApp {
                 .setQuery(QueryBuilders.matchQuery("name", "luna"))
                 .execute()
                 .actionGet();
-        System.out.println(searchResponse.getHits().getTotalHits());
         
         searchResponse.getHits().forEach(document -> {
             System.out.println(String.format(
@@ -66,8 +65,9 @@ public class ElasticsearchApp {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         ElasticsearchApp elasticsearchApp = context.getBean(ElasticsearchApp.class);
 
-        
+        System.out.println("Indexing...");
         elasticsearchApp.index();
+        System.out.println("Querying...");
         elasticsearchApp.query();
     }
 }
