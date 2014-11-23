@@ -1,13 +1,10 @@
 package net.maeph.jug.lucene.data;
 
 
-import com.google.gson.Gson;
-import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.StringReader;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -25,10 +22,9 @@ public class DatasetResourceTest {
     public void shouldReadSingleJSONelement() throws Exception {
 
 
-        DatasetResource resourceUnderTest = new DatasetResource();
-
         StringReader reader = new StringReader(getJsonString());
-        ReflectionTestUtils.setField(resourceUnderTest, "inputReader", reader);
+        DatasetResource resourceUnderTest = DatasetResource.from(reader);
+
         Iterator<Map> iterator = resourceUnderTest.iterator();
         assertTrue(iterator.hasNext());
         Map element = iterator.next();

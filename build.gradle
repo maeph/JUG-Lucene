@@ -20,12 +20,7 @@ dependencies {
     compile "org.apache.lucene:lucene-core:$luceneVersion"
     compile "org.apache.lucene:lucene-analyzers-common:$luceneVersion"
     compile "org.apache.lucene:lucene-queryparser:$luceneVersion"
-    
-    //Solr Example dependencies
-    compile 'org.apache.solr:solr-solrj:4.8.0'
-    
-    //Elasticsearch Example dependencies
-    compile 'org.elasticsearch:elasticsearch:1.1.1'
+    compile "org.apache.lucene:lucene-analyzers-stempel:$luceneVersion"
 
 
     compile 'com.google.code.gson:gson:2.2.4'

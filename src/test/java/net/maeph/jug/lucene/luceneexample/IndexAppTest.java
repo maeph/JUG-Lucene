@@ -24,7 +24,7 @@ public class IndexAppTest {
         element.put("text", "this is a text field");
 
 
-        Document document = new LuceneApp().fromMap(element);
+        Document document = new LuceneJUGUtils().fromMap(element);
         assertThat(document.get("id")).isEqualTo("1");
         assertThat(document.getValues("tags")).containsExactly("sit", "dolorem");
         

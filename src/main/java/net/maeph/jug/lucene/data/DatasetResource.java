@@ -13,12 +13,18 @@ import java.util.function.Supplier;
 @Component
 public class DatasetResource implements Iterable<Map> {
     
-    @Autowired
-    @Qualifier("jsonSource")
+  
     private Reader inputReader;
 
-    
+    private DatasetResource(Reader inputReader) {
+        this.inputReader = inputReader;
+    }
 
+    public static DatasetResource from(Reader reader) {
+        return new DatasetResource(reader);
+    }
+        
+        
     @Override
     public Iterator<Map> iterator() {
         Gson gson = new Gson();

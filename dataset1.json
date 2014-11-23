@@ -1,0 +1,20 @@
+[{
+    "opis": "Tekst z polskimi i Dużymi literami"
+},
+{
+    "opis": "tekst z polskimi i bez dużych liter"
+},
+{
+    "opis": "Tekst bez polskich, za to z duzymi literami"
+},
+{
+    "opis": "Tekst z polskimi i dużymi, małymi literami"
+},
+ {
+     "opis": "Tekst z polskimi i Dużymi, małymi literami"
+ },
+   {
+       "opis": "<H1>Tekst z polskimi i <div class=\"duży\">niedużymi</div>, małymi literami</H1>"
+   }
+
+]
