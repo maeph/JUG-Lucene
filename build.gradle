@@ -4,7 +4,7 @@ sourceCompatibility = 1.8
 version = '1.0'
 
 springVersion = '4.0.4.RELEASE'
-luceneVersion = '4.8.1'
+luceneVersion = '4.10.2'
 repositories {
     mavenCentral()
 }
