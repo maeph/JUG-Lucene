@@ -34,7 +34,7 @@ import java.util.stream.Stream;
 public class LuceneJUGUtils {
 
     public static final Version MATCH_VERSION = Version.LUCENE_4_10_2;
-    public static final String INDEX_PATH = "c:\\jug\\lucene\\lucene\\index";
+    public static final String INDEX_PATH = "index";
 
 
     private static ResourceLoader resourceLoader = new FileSystemResourceLoader();
@@ -56,6 +56,7 @@ public class LuceneJUGUtils {
                         }
                     });
             writer.commit();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -109,12 +110,11 @@ public class LuceneJUGUtils {
     private File getIndexDir() {
         File path = new File(INDEX_PATH);
 
-        if (!path.exists()) {
-            path = Files.newFolder(INDEX_PATH);
+        if (path.exists()) {
+            Files.delete(path);
         }
-        return path;
+        return Files.newFolder(INDEX_PATH);
     }
-
 
     Document fromMap(Map element) {
         System.out.println(element.toString());
