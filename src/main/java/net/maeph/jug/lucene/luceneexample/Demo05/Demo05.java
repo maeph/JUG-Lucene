@@ -1,6 +1,6 @@
 package net.maeph.jug.lucene.luceneexample.Demo05;
 
-import net.maeph.jug.lucene.luceneexample.LuceneJUGUtils;
+import net.maeph.jug.lucene.luceneexample.IndexOperations;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.queryparser.classic.ParseException;
 
@@ -14,15 +14,15 @@ public class Demo05 {
     public static void main(String[] args) throws IOException, ParseException {
 
         Analyzer analyzer = new StandardLowercaseWithStempelAnalyzer();
-        LuceneJUGUtils luceneJUGUtils = new LuceneJUGUtils();
+        IndexOperations indexOperations = new IndexOperations();
 
         
         
         System.out.println("Indexing...");
-        luceneJUGUtils.index("dataset1.json", analyzer);
+        indexOperations.index("dataset1.json", analyzer);
         System.out.println("Querying (dużymi)...");
-        luceneJUGUtils.query("opis", "dużymi", analyzer);
+        indexOperations.query("opis", "dużymi", analyzer);
         System.out.println("Querying (duzymi)...");
-        luceneJUGUtils.query("opis", "duzymi", analyzer);
+        indexOperations.query("opis", "duzymi", analyzer);
     }
 }

@@ -1,10 +1,7 @@
 package net.maeph.jug.lucene.luceneexample.Demo07;
 
 import net.maeph.jug.lucene.luceneexample.Demo06.StandardLowercaseWithStempelAndSynonymsAnalyzer;
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.TokenFilter;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.*;
 import org.apache.lucene.analysis.charfilter.HTMLStripCharFilter;
 import org.apache.lucene.analysis.core.LowerCaseFilter;
 import org.apache.lucene.analysis.pl.PolishAnalyzer;
@@ -28,7 +25,8 @@ public class HTMLStandardLowercaseWithStempelAndSynonymsAnalyzer extends Analyze
     @Override
     protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
 
-        Tokenizer tokenizer = new StandardTokenizer(new HTMLStripCharFilter(reader));
+        CharFilter charFilter = new HTMLStripCharFilter(reader);
+        Tokenizer tokenizer = new StandardTokenizer(charFilter);
 
         StempelStemmer stemmer = new StempelStemmer(PolishAnalyzer.getDefaultTable());
         

@@ -28,7 +28,7 @@ public class SimpleAnalyzer extends Analyzer {
     public static void main(String[] args) throws IOException {
        
         Analyzer analyzer = new SimpleAnalyzer();
-        TokenStream ts = analyzer.tokenStream("field1", "Toxjestxzdaniexktorexniexmaxspacji");
+        TokenStream ts = analyzer.tokenStream("field1", "to jest przyklad");
         ts.reset();
         while (ts.incrementToken()) {
             System.out.println("token:" + ts.toString());

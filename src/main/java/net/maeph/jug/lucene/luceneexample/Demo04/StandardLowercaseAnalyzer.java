@@ -33,7 +33,7 @@ public class StandardLowercaseAnalyzer extends Analyzer {
     public static void main(String[] args) throws IOException {
        
         Analyzer analyzer = new StandardLowercaseAnalyzer();
-        TokenStream ts = analyzer.tokenStream("field1", "Dużymi");
+        TokenStream ts = analyzer.tokenStream("field1", "Dużymi,małymi");
         ts.reset();
         while (ts.incrementToken()) {
             System.out.println("token:" + ts.toString());

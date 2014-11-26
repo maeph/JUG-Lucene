@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 
-public class LuceneJUGUtils {
+public class IndexOperations {
 
     public static final Version MATCH_VERSION = Version.LUCENE_4_10_2;
     public static final String INDEX_PATH = "index";
